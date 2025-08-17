@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/map"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.amap.api.maps.MapView
+        android:id="@+id/map_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+    </com.amap.api.maps.MapView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabWorld"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="26dp"
+        android:src="@drawable/ic_world"
+        android:scaleType="fitCenter"
+        app:backgroundTint="@android:color/transparent"
+        app:fabCustomSize="56dp"
+        app:useCompatPadding="false"
+        app:maxImageSize="56dp"
+        app:elevation="0dp"
+        app:rippleColor="@color/purple_500"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinator"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/bottom_sheet_ray"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:orientation="vertical"
+                app:behavior_hideable="false"
+                app:behavior_peekHeight="200dp"
+                app:layout_behavior="@string/bottom_sheet_behavior">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/background"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="50dp"
+                            android:layout_height="5dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/round_bg" />
+
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/tabLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            app:tabGravity="fill"
+                            app:tabIndicatorColor="@color/purple_500"
+                            app:tabIndicatorFullWidth="false"
+                            app:tabIndicatorGravity="bottom"
+                            app:tabIndicatorHeight="2dp"
+                            app:tabMode="fixed"
+                            app:tabSelectedTextColor="@color/white"
+                            app:tabTextColor="@color/home_gray">
+
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="推荐" />
+
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="最新" />
+
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="附近" />
+                        </com.google.android.material.tabs.TabLayout>
+
+                        <androidx.core.widget.NestedScrollView
+                            android:id="@+id/netscrollView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@id/tabLayout"
+                            android:layout_marginTop="40dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="16dp">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="20dp">
+
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:layout_width="70dp"
+                                        android:layout_height="70dp"
+                                        app:cardBackgroundColor="@color/white"
+                                        app:cardCornerRadius="35dp"
+                                        app:cardElevation="0dp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent">
+
+                                        <com.google.android.material.imageview.ShapeableImageView
+                                            android:id="@+id/imageView_man"
+                                            android:layout_width="63dp"
+                                            android:layout_height="63dp"
+                                            android:layout_gravity="center"
+                                            android:scaleType="centerCrop"
+                                            android:src="@drawable/im_19"
+                                            app:shapeAppearanceOverlay="@style/CircleWithWhiteBorder" />  <!-- 移除边框样式 -->
+                                    </com.google.android.material.card.MaterialCardView>
+
+                                    <TextView
+                                        android:id="@+id/textView_date"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="2023.06.23"
+                                        android:textColor="@color/white"
+                                        android:textSize="34sp"
+                                        android:textStyle="bold"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <TextView
+                                        android:id="@+id/textView_location"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="中国·浙江省·杭州市"
+                                        android:textColor="@color/white"
+                                        android:textSize="17sp"
+                                        android:textStyle="bold"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="@+id/textView_date"
+                                        app:layout_constraintStart_toStartOf="@+id/textView_date"
+                                        app:layout_constraintTop_toBottomOf="@+id/textView_date" />
+
+                                    <ImageView
+                                        android:layout_width="70dp"
+                                        android:layout_height="50dp"
+                                        android:src="@drawable/ic_xinqing"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toEndOf="@+id/textView_date"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+                                <!-- 用户信息 -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="16dp"
+                                    android:layout_marginBottom="16dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginStart="8dp"
+                                        android:text="回音"
+                                        android:textColor="@color/white"
+                                        android:textSize="18sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <!-- 音频文案 -->
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="50dp"
+                                    android:layout_marginBottom="20dp"
+                                    android:background="@drawable/ic_bgcallback1"
+                                    android:text=""
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="360dp"
+                                    android:layout_marginBottom="100dp"
+                                    android:background="@drawable/ic_bgcallback2"
+                                    android:orientation="vertical"
+                                    android:padding="20dp">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="24dp"
+                                        android:gravity="center"
+                                        android:text="从地铁站走到公司，8分钟。我录下的是第5分钟的风声"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/white"
+                                        android:textSize="27sp"
+                                        android:textStyle="bold" />
+
+                                    <ImageView
+                                        android:id="@+id/upaudioWaveView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="50dp"
+                                        android:layout_marginBottom="16dp"
+                                        android:background="@drawable/ic_suipian" />
+                                    <!-- 音频波形图 -->
+                                    <ImageView
+                                        android:id="@+id/audioWaveView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="70dp"
+                                        android:layout_marginBottom="24dp"
+                                        android:background="@drawable/ic_wave" />
+
+                                    <!-- 播放控制按钮 -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="24dp"
+                                            android:layout_height="24dp"
+                                            android:layout_marginEnd="32dp"
+                                            android:src="@drawable/ic_gooded" />
+
+                                        <ImageView
+                                            android:layout_width="24dp"
+                                            android:layout_height="24dp"
+                                            android:layout_marginEnd="32dp"
+
+                                            android:src="@drawable/ic_skip_forward" />
+
+                                        <ImageView
+                                            android:layout_width="48dp"
+                                            android:layout_height="48dp"
+                                            android:layout_marginEnd="32dp"
+
+                                            android:src="@drawable/ic_pause" />
+
+                                        <ImageView
+                                            android:layout_width="24dp"
+                                            android:layout_height="24dp"
+                                            android:layout_marginEnd="32dp"
+
+                                            android:src="@drawable/ic_skip_next" />
+
+                                        <ImageView
+                                            android:layout_width="24dp"
+                                            android:layout_height="24dp"
+                                            android:src="@drawable/ic_message" />
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </androidx.core.widget.NestedScrollView>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </RelativeLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

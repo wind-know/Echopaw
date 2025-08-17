@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:padding="20dp">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="心情录"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- 日期 -->
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2025.4.27"
+        android:textColor="@color/white"
+        android:textSize="45sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        android:layout_marginTop="40dp"/>
+
+    <!-- 地点 -->
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="中国·浙江省·杭州市"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/date"
+        android:layout_marginTop="4dp"/>
+
+    <!-- 输入框 -->
+    <EditText
+        android:id="@+id/input_box"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:hint="输入分享你此刻的..."
+        android:textColor="#FFFFFF"
+        android:textColorHint="#80FFFFFF"
+        android:background="@drawable/bg_edit"
+        android:gravity="center"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/location"
+        android:layout_marginTop="24dp"/>
+
+    <!-- 渐变气泡（初始隐藏） -->
+    <ImageView
+        android:id="@+id/bubble"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_record"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_box"
+        app:layout_constraintBottom_toTopOf="@id/waveform"
+        android:layout_marginTop="10dp"/>
+
+    <!-- 音频波形图（初始隐藏） -->
+    <com.example.echopaw.home.WaveformView
+        android:id="@+id/waveform"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bubble"
+        app:layout_constraintBottom_toTopOf="@id/record_control"
+        android:layout_marginTop="16dp"/>
+
+    <!-- 录音控制区 -->
+    <LinearLayout
+        android:id="@+id/record_control"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/waveform"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="12dp">
+
+        <!-- 录音按钮 -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/record_btn"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="TODO"
+            android:src="@drawable/ic_microphone"
+            app:backgroundTint="@color/transparent"
+            android:scaleType="centerCrop"
+            app:useCompatPadding="false"
+            app:maxImageSize="100dp"
+            app:fabCustomSize="100dp"/>
+
+        <!-- 录音状态 -->
+        <TextView
+            android:id="@+id/recording_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:text="点击录音"
+            android:textColor="#FFFFFF"/>
+
+        <!-- 录音时间（初始隐藏） -->
+        <TextView
+            android:id="@+id/recording_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="4dp"
+            android:text="00:00.00"
+            android:textColor="#B3FFFFFF"
+            android:visibility="invisible"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
