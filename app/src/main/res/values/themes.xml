@@ -38,7 +38,6 @@
         <!-- 关键：将背景设置为你需要的颜色（示例为深蓝色）或图片 -->
         <item name="android:windowBackground">@drawable/bg3</item>
         <!-- 若需要图片背景，替换为：@drawable/your_background_image -->
-
         <!-- 保留其他透明相关配置（确保地球背景仍能透明显示） -->
         <item name="android:windowIsTranslucent">true</item> <!-- 保持半透明特性 -->
         <item name="android:windowContentOverlay">@null</item> <!-- 去除内容覆盖层 -->
