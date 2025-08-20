@@ -1,60 +1,56 @@
+// MessageFragment.java
 package com.example.echopaw.message
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.echopaw.R
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import java.util.List
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MessageFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MessageFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_message2, container, false)
-    }
+        val view = inflater.inflate(R.layout.fragment_message, container, false)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MessageFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MessageFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        val dividerItemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+        val drawable = requireContext().getDrawable(R.drawable.divider)
+        if (drawable != null) {
+            dividerItemDecoration.setDrawable(drawable)
+        }
+        recyclerView.addItemDecoration(dividerItemDecoration)
+
+        val dataList = List.of(
+            Message(R.drawable.pic1, "2025.04.27 11:11", "中国•浙江省•杭州市", "#神秘"),
+            Message(R.drawable.pic2, "2025.03.10 08:15", "中国•浙江省•杭州市", "#快乐"),
+            Message(R.drawable.pic3, "2025.02.02 11:11", "中国•浙江省•杭州市", "#快乐"),
+            Message(R.drawable.pic4, "2025.02.10 11:11", "中国•浙江省•杭州市", "#神秘"),
+            Message(R.drawable.pic5, "2025.01.10 08:15", "中国•浙江省•杭州市", "#神秘"),
+            Message(R.drawable.pic6, "2025.12.27 11:11", "中国•浙江省•杭州市", "#期待"),
+            Message(R.drawable.pic1, "2025.11.20 12:11", "中国•浙江省•杭州市", "#神秘"),
+            Message(R.drawable.pic2, "2025.05.10 08:14", "中国•浙江省•杭州市", "#期待"),
+            Message(R.drawable.pic3, "2025.02.18 09:29", "中国•浙江省•杭州市", "#神秘"),
+            Message(R.drawable.pic4, "2025.07.01 08:21", "中国•浙江省•杭州市", "#快乐"),
+            Message(R.drawable.pic5, "2025.11.22 15:30", "中国•浙江省•杭州市", "#神秘")
+        )
+        recyclerView.adapter = RecyclerAdapter(dataList)
+        OverScrollDecoratorHelper.setUpOverScroll(
+            recyclerView,
+            OverScrollDecoratorHelper.ORIENTATION_VERTICAL
+        )
+
+        return view
     }
 }

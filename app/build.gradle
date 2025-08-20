@@ -63,9 +63,11 @@ dependencies {
     implementation 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2"
-    // 通常也建议配合 lifecycle-runtime-ktx，用于 Lifecycle 相关的协程等支持
+
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.2"
-    // 核心依赖：Fragment KTX（提供 viewModels() 扩展）
+
     implementation "androidx.fragment:fragment-ktx:1.6.2"
-    implementation "androidx.activity:activity-ktx:1.8.0" // 可选，Activity 中使用 viewModels() 需此依赖
+    implementation "androidx.activity:activity-ktx:1.8.0"
+    implementation 'io.github.everythingme:overscroll-decor-android:1.1.1'
+    implementation 'org.rajawali3d:rajawali:1.2.1970'
 }

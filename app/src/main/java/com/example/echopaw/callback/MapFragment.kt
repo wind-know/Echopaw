@@ -17,6 +17,7 @@ import android.transition.AutoTransition
 import android.transition.TransitionManager
 import android.util.DisplayMetrics
 import android.util.Log
+import android.view.Gravity
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -209,15 +210,17 @@ class MapFragment : Fragment(), AMapLocationListener, LocationSource,
         smallHideAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.scale_small_close)
         // 在 onViewCreated 或 onCreate 中
         binding.fabWorld.setOnClickListener {
-                showMsg("世界地图")
-//            // 方式2：带动画的跳转（推荐）
-//            val intent = Intent(requireContext(), WorldActivity::class.java).apply {
-//                putExtra("key_origin", "map_fragment")  // 可传递参数
-//            }
-//            startActivity(intent)
-//            requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+//                showMsg("世界地图")
+            // 方式2：带动画的跳转（推荐）
+            val intent = Intent(requireContext(), WorldActivity::class.java).apply {
+                putExtra("key_origin", "map_fragment")  // 可传递参数
+            }
+            startActivity(intent)
+            requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
         binding.tabLayout.apply {
+            // 首先清除XML中定义的Tab
+            removeAllTabs()
             // 设置Tab文本样式
             setTabTextColors(ContextCompat.getColor(context, R.color.home_gray),
                 ContextCompat.getColor(context, R.color.white))
@@ -235,24 +238,43 @@ class MapFragment : Fragment(), AMapLocationListener, LocationSource,
                     }
                 }
             }
+            // 为每个 Tab 设置自定义视图（确保是 TextView）
+            repeat(3) { position ->
+                val tab = newTab()
+                val textView = TextView(context).apply {
+                    text = when (position) {
+                        0 -> "附近"
+                        1 -> "热门"
+                        else -> "最新"
+                    }
+                    setTextColor(ContextCompat.getColor(context, R.color.home_gray))
+                    textSize = 14f
+                    gravity = Gravity.CENTER
+                }
+                tab.customView = textView
+                addTab(tab)
+            }
 
-            // 或者使用更精确的指示条自定义（推荐）
+            // 添加监听器（现在可以安全转换，因为 customView 是 TextView）
             addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
-                    val tabView = tab.view as LinearLayout
-                    val textView = tabView.getChildAt(0) as TextView
-                    textView.typeface = Typeface.DEFAULT_BOLD  // 选中加粗
+                    (tab.customView as? TextView)?.apply {
+                        setTextColor(ContextCompat.getColor(context, R.color.white))
+                        typeface = Typeface.DEFAULT_BOLD
+                    }
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab) {
-                    val tabView = tab.view as LinearLayout
-                    val textView = tabView.getChildAt(0) as TextView
-                    textView.typeface = Typeface.DEFAULT  // 取消选中恢复普通字体
+                    (tab.customView as? TextView)?.apply {
+                        setTextColor(ContextCompat.getColor(context, R.color.home_gray))
+                        typeface = Typeface.DEFAULT
+                    }
                 }
 
                 override fun onTabReselected(tab: TabLayout.Tab) {}
             })
         }
+
         bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetRay).apply {
             isHideable = true
             state = BottomSheetBehavior.STATE_COLLAPSED

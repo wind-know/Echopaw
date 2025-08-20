@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-  
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_toggle_rotation"
+        android:title="切换自动旋转"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_locate_china"
+        android:title="定位到中国"
+        app:showAsAction="ifRoom" />
 </menu>

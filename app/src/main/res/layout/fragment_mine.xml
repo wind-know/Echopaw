@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg3"
-    android:id="@+id/main">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".mine.MineFragment">
 
     <FrameLayout
         android:layout_width="match_parent"

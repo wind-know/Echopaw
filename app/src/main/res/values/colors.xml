@@ -6,4 +6,17 @@
     <color name="transparent">#00FFFFFF</color>
     <color name="home_gray">#5D5D5D</color>
     <color name="purple_500">#2930ff</color>
+
+    <color name="card_background_home">#BCB3C3</color> <!-- 首页卡片背景色 -->
+    <color name="card_background_mine">#181818</color> <!-- 我的卡片背景色 -->
+    <color name="tag_mystery">#7354FF</color> <!-- 神秘 -->
+    <color name="tag_happy">#FFBF2F</color> <!-- 快乐 -->
+    <color name="tag_expect">#FF8753</color> <!-- 期待 -->
+    <color name="tag_relax">#FFB800</color> <!-- 放松 -->
+    <color name="tag_calm">#93C5FD</color> <!-- 平静 -->
+    <color name="tag_lonely">#684EFB</color> <!-- 孤独 -->
+    <color name="tag_location">#4A3AA6</color> <!-- 位置 -->
+    <color name="tag_default">#888888</color> <!-- 其他 -->
+    <color name="tag_indicator">#684EFB</color> <!-- 标签指示器颜色 -->
+    <color name="tab_text">#8E8A8A</color> <!-- 标签文字颜色 -->
 </resources>

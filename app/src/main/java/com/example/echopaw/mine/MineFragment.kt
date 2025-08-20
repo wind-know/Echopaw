@@ -1,60 +1,54 @@
 package com.example.echopaw.mine
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.example.echopaw.R
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import java.util.List
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [MineFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MineFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mine2, container, false)
-    }
+        val view = inflater.inflate(R.layout.fragment_mine, container, false)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MineFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MineFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        val fragmentList = List.of<Fragment>(
+            ViewPagerFragment(),
+            ViewPagerFragment(),
+            ViewPagerFragment(),
+            ViewPagerFragment(),
+            ViewPagerFragment()
+        )
+
+        val adapter = PagerAdapter(
+            requireActivity(),
+            fragmentList
+        )
+        val viewPager2 = view.findViewById<ViewPager2>(R.id.viewPager2)
+        viewPager2.adapter = adapter
+
+        val tabLayout = view.findViewById<TabLayout>(R.id.tabLayout)
+
+        TabLayoutMediator(
+            tabLayout, viewPager2
+        ) { tab: TabLayout.Tab, position: Int ->
+            when (position) {
+                0 -> tab.setText("全部记录")
+                1 -> tab.setText("时间线")
+                2 -> tab.setText("地图视图")
+                3 -> tab.setText("我的收藏")
+                4 -> tab.setText("回应记录")
+                else -> tab.setText("未知")
             }
+        }.attach()
+
+        return view
     }
 }
