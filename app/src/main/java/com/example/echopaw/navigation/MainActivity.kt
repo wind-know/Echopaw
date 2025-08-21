@@ -188,23 +188,23 @@ class MainActivity : AppCompatActivity(), INavigationContract.INavigationView {
         if (floatingActionMenu != null) return
         val builder = SubActionButton.Builder(this)
 
-        val wishingButton = createCircleImageSubActionButton(builder, R.drawable.ic_r_wishing) {
-            handleActionButtonClick("许愿")
-        }
+
         val recordButton = createCircleImageSubActionButton(builder, R.drawable.ic_r_record) {
             handleActionButtonClick("心情录")
         }
         val bottleButton = createCircleImageSubActionButton(builder, R.drawable.ic_r_bottle) {
             handleActionButtonClick("留声瓶")
         }
-
+        val wishingButton = createCircleImageSubActionButton(builder, R.drawable.ic_r_wishing) {
+            handleActionButtonClick("许愿")
+        }
         floatingActionMenu = FloatingActionMenu.Builder(this)
             .setStartAngle(220)
             .setEndAngle(320)
             .setRadius(dpToPx(120))
-            .addSubActionView(bottleButton)
             .addSubActionView(wishingButton)
             .addSubActionView(recordButton)
+            .addSubActionView(bottleButton)
             .attachTo(binding.fabNavigation)
             .build()
     }
